@@ -1,35 +1,56 @@
-# Switch to spec README
+# Switch to Spec
 
-This is the README for your extension "switch-to-spec". After writing up a brief description, we recommend including the following sections.
+This extension adds a keybinding to switch between the spec file and the code file.
 
-## Features
+## How it works?
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+Spec files should have one of the spec suffixes:
 
-For example if there is an image subfolder under your extension project workspace:
+`.spec`, `.test`, `_spec`, `_test`, `-spec`, or `-test`
 
-\!\[feature X\]\(images/feature-x.png\)
+And it must have the same folder structure as the code file.
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+See some folder structure examples bellow:
 
-## Requirements
+### Example 1:
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+Code file: `src/services/users/create_service.rb`
 
-## Extension Settings
+Spec file: `spec/services/users/create_service_spec.rb`
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+### Example 2:
 
-For example:
+Code file: `src/components/cards/DashboardCard.js`
 
-This extension contributes the following settings:
+Spec file: `src/__tests__/components/cards/DashboardCard.test.js`
 
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
+### Example 3:
+
+Code file: `src/components/cards/DashboardCard.ts`
+
+Spec file: `__tests__/components/cards/DashboardCard-test.ts`
+
+### Example 4:
+
+Code file: `src/components/cards/DashboardCard.ts`
+
+Spec file: `src/__tests__/components/cards/DashboardCard-test.ts`
+
+## How to use?
+
+Mac OS: `ctrl+alt+t`
+
+Windows: `ctrl+alt+t`
 
 ## Release Notes
+
+### 0.0.2
+
+Changed keybinding to not conflict with default command `Reopen closed editor`
+
+Removed `when` expression while defining keybinding so editor does not need to be active to trigger
+command
 
 ### 0.0.1
 
 Initial release
-
