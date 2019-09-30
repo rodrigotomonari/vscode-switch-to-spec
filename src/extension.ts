@@ -1,15 +1,12 @@
 import * as vscode from 'vscode';
 
 function findSpecFile(suffix: string, folders: Array<string>, filenameWithoutExtension: string, filenameExtension: string) {
-  if (folders.length === 0) {
-    return;
-  }
-
-  const file = `**/${folders.join('/')}/${filenameWithoutExtension}${suffix}${filenameExtension}`;
+  const file = ['**', ...folders, `${filenameWithoutExtension}${suffix}${filenameExtension}`].join('/');
+  console.log('Search file: ', file);
   vscode.workspace.findFiles(file, '**/node_modules/**').then(files => {
-    if (files.length === 0) {
+    if (files.length === 0 && folders.length > 0) {
       findSpecFile(suffix, folders.slice(1), filenameWithoutExtension, filenameExtension);
-    } else {
+    } else if(files.length > 0) {
       vscode.workspace.openTextDocument(vscode.Uri.file(files[0].path))
         .then(vscode.window.showTextDocument);
     }
@@ -18,6 +15,7 @@ function findSpecFile(suffix: string, folders: Array<string>, filenameWithoutExt
 
 export function activate(context: vscode.ExtensionContext) {
   let disposable = vscode.commands.registerCommand('extension.switchToSpec', () => {
+    console.log('switchToSpec');
     const editor = vscode.window.activeTextEditor;
     if (!editor) {
       return;
